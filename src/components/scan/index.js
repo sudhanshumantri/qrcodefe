@@ -17,7 +17,9 @@ const ScanQrCode = (props) => {
         setResponce(null);
     }
     const handleScan = (result, error) => {
-        if (!!result) {
+        if (result && isScanQrCode) {
+            console.log('result',isScanQrCode);
+            setIsScanQrCode(false);
             setData(result?.text);
             let phone = result?.text;
             if (phone) {
@@ -28,7 +30,7 @@ const ScanQrCode = (props) => {
                     })
                     .then((response) => {
                         setResponce(response.data);
-                        setIsScanQrCode(false);
+                      //  setIsScanQrCode(false);
                         setShowLoader(false);
                     });
             }
@@ -36,23 +38,24 @@ const ScanQrCode = (props) => {
         }
 
         if (!!error) {
-            console.info(error);
+            // console.info(error);
         }
     }
     return (
         <>
             {showLoader && <Loader />}
             <Grid container spacing={2}>
-                {isScanQrCode && <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-                    <QrReader
-                        onResult={handleScan}
-                        scanDelay={300}
-                        // constraints={{
-                        //     facingMode: 'environment'
-                        // }}
-                        style={{ width: '100%' }}
-                    />
-                </Grid>}
+                {isScanQrCode &&
+                    <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+                        <QrReader
+                            onResult={handleScan}
+                            scanDelay={300}
+                            // constraints={{
+                            //     facingMode: 'environment'
+                            // }}
+                            containerStyle={{ width: '500px', height: '500px' }}
+                        />
+                    </Grid>}
                 {(responce && !responce.status) && <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", color: "red" }}>
                     <Card>
                         <CardContent>
