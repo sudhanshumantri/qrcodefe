@@ -11,7 +11,8 @@ const ScanQrCode = (props) => {
     const [isScanQrCode, setIsScanQrCode] = useState(false);
     const [responce, setResponce] = useState(null);
     const [showLoader, setShowLoader] = useState(false);
-    const baseURL = 'http://localhost:8000/qr-code/scan';
+    const baseURL = 'https://qrcodebe.onrender.com/qr-code/scan';
+    // const baseURL = 'http://localhost:8000/qr-code/scan';
     const handleScanCilck = () => {
         setIsScanQrCode(true);
         setResponce(null);

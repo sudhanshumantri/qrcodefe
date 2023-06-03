@@ -16,7 +16,8 @@ const UploadCsv = () => {
     removeFile,
   } = useFileUpload();
   const inputRef = useRef();
-  const baseURL = 'http://localhost:8000/qr-code/uploadcsv';
+  const baseURL = 'https://qrcodebe.onrender.com/qr-code/uploadcsv';
+  // const baseURL = 'http://localhost:8000/qr-code/uploadcsv';
   const handleSubmit = async () => {
     // const formData = createFormData();
     console.log('files', files);
