@@ -51,9 +51,10 @@ const ScanQrCode = (props) => {
                         <QrReader
                             onResult={handleScan}
                             scanDelay={300}
-                            // constraints={{
-                            //     facingMode: 'environment'
-                            // }}
+                          // facingMode={selected}
+                            constraints={{
+                                facingMode: 'environment'
+                            }}
                             containerStyle={{ width: '500px', height: '500px' }}
                         />
                     </Grid>}
