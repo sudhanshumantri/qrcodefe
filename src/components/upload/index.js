@@ -88,7 +88,7 @@ const UploadCsv = () => {
     if (handleValidation()) {
       setShowLoader(true);
       axios
-        .post('http://localhost:8000/qr-code/generate-qr-code', userData)
+        .post('https://qrcodebe.onrender.com/qr-code/generate-qr-code', userData)
         .then((response) => {
           setQrResponceMsg(response.data?.msg);
           //  setIsScanQrCode(false);
@@ -101,6 +101,7 @@ const UploadCsv = () => {
   }
   return (
     <>
+    {showLoader && <Loader />}
       <Grid container spacing={2}>
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
           <div style={{ width: "280px", height: "70px" }}>
@@ -127,7 +128,6 @@ const UploadCsv = () => {
           </FormControl>
         </Grid>
         {(radioValue == "csv") && <Grid item xs={12}>
-          {showLoader && <Loader />}
           <p>{message}</p>
           <div className="file-conatiner">
             {fileNames.map((name, index) => (
