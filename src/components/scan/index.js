@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
-import { Grid, Button, Card, CardContent } from '@mui/material';
+import { Grid, Button, Card, CardContent,Box } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 import Loader from '../loader';
+import icon from '../../asset/icon.png';
 
 const ScanQrCode = (props) => {
     const [data, setData] = useState('');
@@ -19,7 +20,7 @@ const ScanQrCode = (props) => {
     }
     const handleScan = (result, error) => {
         if (result && isScanQrCode) {
-            console.log('result',isScanQrCode);
+            console.log('result', isScanQrCode);
             setIsScanQrCode(false);
             setData(result?.text);
             let phone = result?.text;
@@ -31,7 +32,7 @@ const ScanQrCode = (props) => {
                     })
                     .then((response) => {
                         setResponce(response.data);
-                      //  setIsScanQrCode(false);
+                        //  setIsScanQrCode(false);
                         setShowLoader(false);
                     });
             }
@@ -46,12 +47,22 @@ const ScanQrCode = (props) => {
         <>
             {showLoader && <Loader />}
             <Grid container spacing={2}>
+                <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+                    <div style={{ width: "280px", height: "70px" }}>
+                        <Box
+                            component="img"
+                            sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+                            alt="Icon"
+                            src={icon}
+                        />
+                    </div>
+                </Grid>
                 {isScanQrCode &&
                     <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
                         <QrReader
                             onResult={handleScan}
                             scanDelay={300}
-                          // facingMode={selected}
+                            // facingMode={selected}
                             constraints={{
                                 facingMode: 'environment'
                             }}

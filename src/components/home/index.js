@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ScanQrCode from '../scan';
 import UploadCsv from '../upload';
+import { Grid } from '@mui/material';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
