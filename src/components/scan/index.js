@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
-import { Grid, Button, Card, CardContent,Box } from '@mui/material';
+import { Grid, Button, Card, CardContent, Box } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 import Loader from '../loader';
 import icon from '../../asset/icon.png';
-
+import logoMain from '../../asset/logoMain.jpeg';
 const ScanQrCode = (props) => {
     const [data, setData] = useState('');
     const [isScanQrCode, setIsScanQrCode] = useState(false);
@@ -48,10 +48,17 @@ const ScanQrCode = (props) => {
             {showLoader && <Loader />}
             <Grid container spacing={2}>
                 <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-                    <div style={{ width: "280px", height: "70px" }}>
+                    <div style={{ width: "280px", height: "200px", textAlign: 'center' }}>
                         <Box
                             component="img"
-                            sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+                            sx={{ width: "280px", height: "70px", objectFit: "contain" }}
+                            alt="Icon"
+                            src={logoMain}
+                        />
+                        <p>Powered By </p>
+                        <Box
+                            component="img"
+                            sx={{ width: "280px", height: "70px", objectFit: "contain" }}
                             alt="Icon"
                             src={icon}
                         />

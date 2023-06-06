@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import useFileUpload from 'react-use-file-upload';
-import { Grid, Button, Card, CardContent, TextField, Box, FormHelperText } from '@mui/material';
+import { Grid, Button, Card, CardContent, TextField, Box, FormHelperText, InputLabel, Select, MenuItem } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,6 +9,7 @@ import FormLabel from '@mui/material/FormLabel';
 import axios from "axios";
 import Loader from '../loader';
 import icon from '../../asset/icon.png';
+import logoMain from '../../asset/logoMain.jpeg';
 const UploadCsv = () => {
   const {
     files,
@@ -31,7 +32,7 @@ const UploadCsv = () => {
   const [userData, setUserData] = useState({
     name: "",
     phone: "",
-    status: "",
+    status: "A",
 
   });
   const [validations, setValidation] = useState({
@@ -88,6 +89,7 @@ const UploadCsv = () => {
     if (handleValidation()) {
       setShowLoader(true);
       axios
+        // .post('http://localhost:8000/qr-code/generate-qr-code', userData)
         .post('https://qrcodebe.onrender.com/qr-code/generate-qr-code', userData)
         .then((response) => {
           setQrResponceMsg(response.data?.msg);
@@ -101,13 +103,20 @@ const UploadCsv = () => {
   }
   return (
     <>
-    {showLoader && <Loader />}
+      {showLoader && <Loader />}
       <Grid container spacing={2}>
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ width: "280px", height: "70px" }}>
+          <div style={{ width: "280px", height: "200px", textAlign: 'center' }}>
             <Box
               component="img"
-              sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+              sx={{ width: "280px", height: "70px", objectFit: "contain" }}
+              alt="Icon"
+              src={logoMain}
+            />
+            <p>Powered By </p>
+            <Box
+              component="img"
+              sx={{ width: "280px", height: "70px", objectFit: "contain" }}
               alt="Icon"
               src={icon}
             />
@@ -204,7 +213,22 @@ const UploadCsv = () => {
                     )}
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Zone</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={userData.status}
+                        label="Age"
+                        size="small"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={'A'}>A</MenuItem>
+                        <MenuItem value={'B'}>B</MenuItem>
+                        <MenuItem value={'C'}>C</MenuItem>
+                      </Select>
+                    </FormControl>
+                    {/* <TextField
                       required
                       fullWidth
                       id="firstName"
@@ -223,7 +247,7 @@ const UploadCsv = () => {
                       >
                         Please enter status
                       </FormHelperText>
-                    )}
+                    )} */}
                   </Grid>
                   <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
                     <Button variant="contained" onClick={handleQrSubmit}>submit</Button>
